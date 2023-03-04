@@ -5,12 +5,15 @@
  * Purpose: USing XML comments and understanding Methods
  * 
  */
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
+
 namespace Comp003A.Assignment5;
 class Program
 {
     static void Main(string[] args)
     {
-        
+
 
         PrintSeparator();
         PrintSeparator("Triangle Section");
@@ -26,21 +29,21 @@ class Program
         PrintSeparator();
         PrintSeparator("Age Calculator");
         PrintSeparator();
-        Console.WriteLine("Enter value for current year: ");
-        decimal num1 = Convert.ToDecimal(Console.ReadLine());
+
         Console.WriteLine("Enter value for your birthyear: ");
-        decimal year = Convert.ToDecimal(Console.ReadLine());
-        AgeCalculator(num1, year);
-        Console.WriteLine($"Your age is: {AgeCalculator(num1, year)}");
+        int year = Convert.ToInt32(Console.ReadLine());
+        AgeCalculator(year);
+        Console.WriteLine($"Your age is: {AgeCalculator(year)}");
 
         PrintSeparator();
         PrintSeparator("Favorite Characters");
         PrintSeparator();
-        CharacterInfo("Harry Styles", DateTime.Now.Year - 1994);
-        CharacterInfo("Doja Cat", DateTime.Now.Year - 1995);
-        CharacterInfo("Quinta Brunson", DateTime.Now.Year - 1989);
-        CharacterInfo("Seth Rogen", DateTime.Now.Year - 1982);
-        CharacterInfo("Pablo Neruda", 1973 - 1904);
+        CharacterInfo("Harry Styles", AgeCalculator(1994));
+        CharacterInfo("Doja Cat", AgeCalculator(1995));
+        CharacterInfo("Quinta Brunson", AgeCalculator(1989));
+        CharacterInfo("Seth Rogan", AgeCalculator(1982));
+        CharacterInfo("Pablo Neruda", AgeCalculator(1904));
+
     }// end of Main code
 
     /// <summary>
@@ -57,7 +60,7 @@ class Program
     /// <param name="title"></param>
     static void PrintSeparator(string title)
     {
-        Console.WriteLine(title);
+        Console.WriteLine($"{title}");
     }
 
     /// <summary>
@@ -87,9 +90,9 @@ class Program
     /// <param name="num1">Decimal input</param>
     /// <param name="year">Decimal input</param>
     /// <returns> Subtraction</returns>
-    static decimal AgeCalculator(decimal num1, decimal year)
+    static int AgeCalculator(int year)
     {
-        return num1 - year;
+        return DateTime.Now.Year - year;
     }
     /// <summary>
     /// Method using recrusion
@@ -98,6 +101,7 @@ class Program
     /// <param name="birthYear"></param>
     static void CharacterInfo(string name, int birthYear)
     {
-        Console.WriteLine($"{name}, {birthYear}");
+        int age = AgeCalculator(birthYear);
+        Console.WriteLine($"\t {name} turns {age} this year!");
     }
 }
